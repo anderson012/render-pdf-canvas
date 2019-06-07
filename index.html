@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            font-family: Helvetica, Arial, sans-serif;
+            background: #525659;
+        }
+
+        .pdf-page {
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            display: flex;
+            margin-bottom: 20px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="title" style="text-align: center;">
+        <h1 style="color: white">Renderizando PDF com canvas</h1>
+        <span style="color: rgb(218, 218, 218);">by Anderson Carlos</span>
+    </header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
+    <script type="module">
+        import start from "./index.js"
+        (() => {
+            start();
+        })();
+    </script>
+</body>
+</html>
