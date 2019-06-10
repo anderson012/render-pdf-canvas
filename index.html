@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>pdf render</title>
     <style>
         html, body {
             font-family: Helvetica, Arial, sans-serif;
@@ -19,6 +19,7 @@
             display: flex;
             margin-bottom: 20px;
             max-width: 100%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         }
     </style>
 </head>
@@ -27,11 +28,20 @@
         <h1 style="color: white">Renderizando PDF com canvas</h1>
         <span style="color: rgb(218, 218, 218);">by Anderson Carlos</span>
     </header>
+    <!-- required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
     <script type="module">
         import start from "./index.js"
-        (() => {
-            start();
+        (async () => {
+            // the magic is here
+            const pdfInfo = await start({
+                appendOn: document.body, //optional param
+                scale: 1.5, //optional param
+            });
+
+            setTimeout(() => {
+                document.querySelector(".title").remove();
+            });
         })();
     </script>
 </body>

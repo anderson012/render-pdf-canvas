@@ -11,17 +11,35 @@ function drawPage(page, width, height) {
     };
 
     img.src = page;
-    img.classList.add("pdf-page")
+    img.classList.add("pdf-page");
   });
 }
 
-const start = async () => {
-  const {pages, width, height} = await render("./documents/example.pdf");
+/**
+ *
+ * @param {HTMLBodyElement} appendOn elemento onde será adicionado as paginas do relatorio
+ */
+const start = async ({ appendOn = null, title = null, scale = 1.5 }) => {
+  const { pages, width, height, info } = await render(
+    "./documents/example.pdf",
+    scale
+  );
   for (var i = 0; i < pages.length; i++) {
     const page = pages[i];
     const img = await drawPage(page, width, height);
-    document.body.append(img);
+    if (!appendOn) {
+      document.body.append(img);
+    } else {
+      appendOn.append(img);
+    }
+
+    if (!title) {
+      document.head.querySelector("title").textContent = info.Title;
+    } else {
+      title.textContent = info.Title;
+    }
   }
+  return info;
 };
 
 export default start;
