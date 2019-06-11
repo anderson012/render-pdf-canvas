@@ -27,11 +27,15 @@ const start = async ({ appendOn = null, title = null, scale = 1.5 }) => {
   for (var i = 0; i < pages.length; i++) {
     const page = pages[i];
     const img = await drawPage(page, width, height);
+    img.classList.add("hide");
     if (!appendOn) {
       document.body.append(img);
     } else {
       appendOn.append(img);
     }
+    setTimeout(() => {
+      img.classList.remove("hide");
+    }, 300);
 
     if (!title) {
       document.head.querySelector("title").textContent = info.Title;

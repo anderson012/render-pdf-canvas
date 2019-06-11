@@ -20,7 +20,87 @@
             margin-bottom: 20px;
             max-width: 100%;
             box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            transition: 0.5s ease;
         }
+
+        .container-loading {
+            display: flex;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+            flex: 1;
+            width: 100%;
+            transition: 0.2s ease;
+        }
+
+        .loading {
+            align-self: center;
+        }
+
+        span.icon-left {
+            height: 130px;
+            width: 130px;
+            border: 5px solid #2d2f31;
+            border-radius: 100%;
+            position: relative;
+            display: inline-block;
+            transition: all 1s linear;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            animation: rotate-left 1s linear infinite;
+        }
+
+        span.icon-right {
+            height: 100px;
+            width: 100px;
+            border: 5px solid #2d2f31;
+            border-radius: 100%;
+            position: absolute;
+            display: inline-block;
+            transition: all 0.2s linear;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            animation: rotate-right 0.5s linear infinite;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .loading-text {
+            text-align: center;
+            color: #2d2f31;
+            font-size: 30px;
+        }
+
+        .hide {
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+            transform: translateY(10px);
+        }
+
+        @keyframes rotate-left {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    @keyframes rotate-right {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
     </style>
 </head>
 <body>
@@ -28,6 +108,17 @@
         <h1 style="color: white">Renderizando PDF com canvas</h1>
         <span style="color: rgb(218, 218, 218);">by Anderson Carlos</span>
     </header>
+
+    <div class="container-loading">
+        <div class="loading">
+            <span class="icon-left">
+                <span class="icon-right"></span>
+            </span>
+        </div>
+
+        <span class="loading-text">Carregando documento</span>
+    </div>
+
     <!-- required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
     <script type="module">
@@ -39,9 +130,10 @@
                 scale: 1.5, //optional param
             });
 
-            setTimeout(() => {
-                document.querySelector(".title").remove();
-            });
+            document.querySelector(".title").classList.add("hide");
+            document.querySelector(".container-loading").classList.add("hide");
+            
+            
         })();
     </script>
 </body>
